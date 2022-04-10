@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dev": "esno src/index.ts",
-    "build": "tsup src/index.ts --minify --format iife"
+    "build": "tsup src/index.ts --minify --format iife --onSuccess 'mv ./dist/index.global.js ./dist/qqwj.js'"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
