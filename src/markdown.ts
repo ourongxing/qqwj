@@ -7,7 +7,7 @@ const export2md = (res: Record<string, Question[]>, file: string) => {
     content += `\n## ${num}\n`
     data.forEach(({ num, question, answers }, index) => {
       if (index === 0) {
-        content += `\n**信息**\n`
+        content += `\n**问卷信息**\n`
       } else if (num === 0) {
         content += `\n${question}`
         content += `\n- ${answers[0]}\n`

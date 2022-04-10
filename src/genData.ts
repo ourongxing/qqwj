@@ -1,4 +1,4 @@
-const genData = (col: string[]) => {
+const genData = (col: Record<string, string>) => {
   const res = [] as {
     num: number
     question: string
@@ -42,14 +42,7 @@ const genData = (col: string[]) => {
       answers: string[]
     }
   )
-  res.forEach(({ answers }, index) => {
-    if (answers.length > 1 && answers.every(k => Number.isInteger(Number(k)))) {
-      res[index].answers = answers.map((k, i) => {
-        return res[index - 1].answers[Number(k) - 1]
-      })
-    }
-  })
-  res.forEach(({ num, answers }) => {
+  res.forEach(({ num, answers }, index) => {
     if (num === 16) {
       answers.forEach(k => {
         const index = "ABCDEFGHIJKLMNOPQRS".indexOf(k[0])
@@ -77,6 +70,10 @@ const genData = (col: string[]) => {
             return acc
           }, {} as Record<string, string[]>)
         }
+      })
+    } else if (num === 17 || num === 73) {
+      res[index].answers = answers.map((k, i) => {
+        return res[index - 1].answers[Number(k) - 1]
       })
     } else if (num === 74 || num === 78) {
       for (let i = 0; i < 3; i++) {

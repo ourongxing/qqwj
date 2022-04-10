@@ -15,7 +15,7 @@ const main = async (param: Param) => {
   const cols = parse(csvFile, {
     relax_quotes: true,
     columns: true
-  }) as string[][]
+  }) as Array<Record<string, string>>
   const res = {} as Record<string, Question[]>
   cols.forEach(col => {
     const data = genData(col)
