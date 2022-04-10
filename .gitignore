@@ -1,0 +1,8 @@
+node_modules
+pnpm*
+option.ts
+dist
+*.csv
+*.xlsx
+*.md
+MNExplor探索计划用户分型
