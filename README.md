@@ -22,8 +22,8 @@ Options:
   -h, --help         display help for command
 
 Example :
-  $ node qqjw.js xxx.csv
-  $ node qqjw.js xxx.csv -t json -o yyy
+  $ node qqwj.js xxx.csv
+  $ node qqwj.js xxx.csv -t json -o yyy
 ```
 
 ### 开发
