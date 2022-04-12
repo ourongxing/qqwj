@@ -21,15 +21,21 @@ const main = async (param: Param) => {
     const data = genData(col)
     res[data[0].answers[0]] = data
   })
-  switch (type) {
-    case "markdown":
-      export2md(res, out)
-      break
-    case "json":
-      export2json(res, out)
-      break
-    default:
-      export2excel(res, out)
+  try {
+    switch (type) {
+      case "markdown":
+        export2md(res, out)
+        break
+      case "json":
+        export2json(res, out)
+        break
+      default:
+        export2excel(res, out)
+    }
+    console.log(`导出成功，${out}`)
+  } catch (err) {
+    console.log("导出失败")
+    console.log(err)
   }
 }
 
@@ -39,7 +45,11 @@ program
       .choices(["excel", "json", "markdown"])
       .default("excel")
   )
-  .option("-o, --output", "output file name", "MNExplor探索计划用户分型")
+  .option(
+    "-o, --output <name>",
+    "output file name, default MNExplor探索计划用户分型",
+    "MNExplor探索计划用户分型"
+  )
   .addHelpText(
     "after",
     `
@@ -47,8 +57,8 @@ Example :
   $ node qqwj.js xxx.csv
   $ node qqwj.js xxx.csv -t json -o yyy`
   )
+  .parse(process.argv)
 
-program.parse(process.argv)
 const options = program.opts() as {
   output: string
   type: "markdown" | "excel" | "json"
