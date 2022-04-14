@@ -33,7 +33,7 @@ Example :
 )
 
 program
-  .command("export <src> [option]")
+  .command("export <src>")
   .description("export to excel, json, markdown")
   .addOption(
     new Option("-t, --type <type>")
