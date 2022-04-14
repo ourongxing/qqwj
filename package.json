@@ -1,6 +1,8 @@
 {
   "scripts": {
     "dev": "esno src/index.ts",
+    "export": "esno src/index.ts export",
+    "filter": "esno src/index.ts filter",
     "build": "tsup src/index.ts --minify --format iife --onSuccess 'mv ./dist/index.global.js ./dist/qqwj.js'"
   },
   "devDependencies": {

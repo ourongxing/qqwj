@@ -9,3 +9,11 @@ export interface Param {
   out: string
   type: "markdown" | "excel" | "json"
 }
+
+export interface Filter {
+  title: string
+  req: {
+    and: string[]
+    or: string[]
+  }
+}

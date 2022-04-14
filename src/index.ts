@@ -45,7 +45,8 @@ program
     "output file name, default MNExplor探索计划用户分型",
     "MNExplor探索计划用户分型"
   )
-  .action(async (src, _, { type, output }) => {
+  .action(async (src, { type, output }) => {
+    console.log(type)
     const outFileName = ((type, output) => {
       switch (type) {
         case "markdown":

@@ -1,8 +1,8 @@
-import { Question } from "typing"
+import { Filter, Question } from "typing"
 const filter = (res: Record<string, Question[]>) => {
-  const filter = {
-    "CaseNo.2_全文检索Case搜索部分": {
-      result: [] as string[],
+  const filter: Filter[] = [
+    {
+      title: "CaseNo.2_全文检索Case搜索部分",
       req: {
         and: [
           "#首页 🔍全局搜索｜搜索参阅、首页搜索、Spotlight",
@@ -19,8 +19,8 @@ const filter = (res: Record<string, Question[]>) => {
         ]
       }
     },
-    "CaseNo.3_子脑图的二次综合Case": {
-      result: [] as string[],
+    {
+      title: "CaseNo.3_子脑图的二次综合Case",
       req: {
         and: [
           "多个子脑图视图组合、悬浮分割视图❇️",
@@ -38,7 +38,8 @@ const filter = (res: Record<string, Question[]>) => {
         ]
       }
     }
-  }
+  ]
+  const result = {} as Record<string, string[]>
   Object.entries(res).forEach(([id, data]) => {
     const answers = [] as string[]
     data.forEach(({ num, answers: answer }) => {
@@ -46,20 +47,17 @@ const filter = (res: Record<string, Question[]>) => {
         answers.push(...answer)
       }
     })
-    Object.entries(filter).forEach(([, { req, result }]) => {
+    filter.forEach(({ req, title }) => {
       const and = req.and.every(k =>
         answers.filter(h => h.includes(k)).length ? true : false
       )
       const or = req.or.some(k =>
         answers.filter(h => h.includes(k)).length ? true : false
       )
-      if (and && or) result.push(id)
+      if (and && or) result[title] = [...(result[title] ?? []), id]
     })
   })
-  return Object.entries(filter).reduce((acc, [k, v]) => {
-    acc[k] = v.result
-    return acc
-  }, {} as Record<string, string[]>)
+  return result
 }
 
 export default filter
