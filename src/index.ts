@@ -46,7 +46,6 @@ program
     "MNExplor探索计划用户分型"
   )
   .action(async (src, { type, output }) => {
-    console.log(type)
     const outFileName = ((type, output) => {
       switch (type) {
         case "markdown":
@@ -90,8 +89,3 @@ program
   })
 
 program.parse(process.argv)
-
-const options = program.opts() as {
-  output: string
-  type: "markdown" | "excel" | "json"
-}

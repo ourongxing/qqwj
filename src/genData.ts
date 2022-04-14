@@ -1,9 +1,7 @@
+import { Question } from "typing"
+
 const genData = (col: Record<string, string>) => {
-  const res = [] as {
-    num: number
-    question: string
-    answers: string[]
-  }[]
+  const res = [] as Question[]
   Object.entries(col).reduce(
     (acc, cur) => {
       let [question, answer] = cur

@@ -10,10 +10,17 @@ export interface Param {
   type: "markdown" | "excel" | "json"
 }
 
+export type MayBeArray<T> = T[] | T
 export interface Filter {
   title: string
   req: {
-    and: string[]
-    or: string[]
+    and: MayBeArray<{
+      num: number
+      option: string
+    }>[]
+    or: {
+      num: number
+      option: string
+    }[]
   }
 }
