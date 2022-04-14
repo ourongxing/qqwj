@@ -30,7 +30,7 @@ Options:
 ```
 
 ### 筛选
-目前仅支持筛选 16 和 72 题。需要在 `src/filter.ts` 中修改筛选条件。
+需要在 `src/filter.ts` 中修改筛选条件。
 
 ```shell
 pnpm filter 腾讯问卷原始数据
