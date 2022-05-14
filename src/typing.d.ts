@@ -10,17 +10,17 @@ export interface Param {
   type: "markdown" | "excel" | "json"
 }
 
-export type MayBeArray<T> = T[] | T
+export type ThreeTypes<T> =
+  | T
+  | {
+      least: number
+      options: T[]
+    }
+
 export interface Filter {
   title: string
-  req: {
-    and: MayBeArray<{
-      num: number
-      option: string
-    }>[]
-    or: {
-      num: number
-      option: string
-    }[]
-  }
+  conditions: ThreeTypes<{
+    num: number
+    option: string
+  }>[]
 }

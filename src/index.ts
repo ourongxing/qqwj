@@ -9,8 +9,9 @@ import export2json from "json"
 import export2excel from "excel"
 import export2md from "markdown"
 import filter from "filter"
+import genDataEN from "genDtataEN"
 const program = new Command()
-const main = async (src: string) => {
+const main = async (src: string, isEnglish = false) => {
   const csvFile = await fs.readFile(src)
   const cols = parse(csvFile, {
     relax_quotes: true,
@@ -18,7 +19,7 @@ const main = async (src: string) => {
   }) as Array<Record<string, string>>
   const res = {} as Record<string, Question[]>
   cols.forEach(col => {
-    const data = genData(col)
+    const data = isEnglish ? genDataEN(col) : genData(col)
     res[data[0].answers[0]] = data
   })
   return res
@@ -45,7 +46,8 @@ program
     "output file name, default MNExplor探索计划用户分型",
     "MNExplor探索计划用户分型"
   )
-  .action(async (src, { type, output }) => {
+  .option("-e, --english", "英文问卷", false)
+  .action(async (src, { type, output, english }) => {
     const outFileName = ((type, output) => {
       switch (type) {
         case "markdown":
@@ -57,7 +59,8 @@ program
       }
     })(type, output)
     const res = await main(
-      path.resolve(process.cwd(), ensureSuffix(src, "csv"))
+      path.resolve(process.cwd(), ensureSuffix(src, "csv")),
+      english
     )
     const filePath = path.resolve(process.cwd(), outFileName)
     try {
@@ -80,10 +83,12 @@ program
 
 program
   .command("filter <src>")
+  .option("-e, --english", "英文问卷", false)
   .description("clone a repository into a newly created directory")
-  .action(async src => {
+  .action(async (src, { english }) => {
     const res = await main(
-      path.resolve(process.cwd(), ensureSuffix(src, "csv"))
+      path.resolve(process.cwd(), ensureSuffix(src, "csv")),
+      english
     )
     console.log(filter(res))
   })

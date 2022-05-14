@@ -1,6 +1,6 @@
 import { Question } from "typing"
 
-const genData = (col: Record<string, string>) => {
+const genDataEN = (col: Record<string, string>) => {
   const res = [] as Question[]
   Object.entries(col).reduce(
     (acc, cur) => {
@@ -41,17 +41,17 @@ const genData = (col: Record<string, string>) => {
     }
   )
   res.forEach(({ num, answers }, index) => {
-    if (num === 16) {
+    if (num === 14) {
       answers.forEach(k => {
         const index = "ABCDEFGHIJKLMNOPQRS".indexOf(k[0])
         if (index > 0) {
           res.reduce((acc, cur) => {
-            if (cur.num < 36) {
-              if (cur.num === 18 + index - 1) {
+            if (cur.num < 34) {
+              if (cur.num === 16 + index - 1) {
                 acc = {
                   ...acc,
                   ...cur.answers.reduce((a, h, i) => {
-                    a[36 + i + 2 * (index - 1)] = [k, h].map(x =>
+                    a[34 + i + 2 * (index - 1)] = [k, h].map(x =>
                       x.replace(/^\w+\.\s*/, "").replace(/^\d+\.\s*/, "")
                     )
                     return a
@@ -68,11 +68,11 @@ const genData = (col: Record<string, string>) => {
           }, {} as Record<string, string[]>)
         }
       })
-    } else if (num === 17 || num === 73) {
+    } else if (num === 15 || num === 71) {
       res[index].answers = answers.map((k, i) => {
         return res[index - 1].answers[Number(k) - 1]
       })
-    } else if (num === 74 || num === 78) {
+    } else if (num === 72 || num === 76) {
       for (let i = 0; i < 3; i++) {
         res.forEach((d, j) => {
           if (d.num === num + i + 1) {
@@ -97,4 +97,4 @@ const genData = (col: Record<string, string>) => {
   return res.filter(k => !k.question.includes("X"))
 }
 
-export default genData
+export default genDataEN

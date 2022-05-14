@@ -6,3 +6,4 @@ dist
 *.xlsx
 *.md
 MNExplor探索计划用户分型*
+.DS_Store
